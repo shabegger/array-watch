@@ -53,6 +53,80 @@ describe('The array watch function', () => {
       expect(changeHandler).not.toHaveBeenCalled();
     });
 
+    it('fires add/remove/change events when a value is changed', () => {
+      setup([ 'test', 'push', 'pop' ]);
+      array[1] = 'stuff';
+
+      expect(array).toEqual([ 'test', 'stuff', 'pop' ]);
+
+      expect(addHandler).toHaveBeenCalledWith({
+        values: jasmineHelper.arrayMatching([ 'stuff' ])
+      });
+
+      expect(removeHandler).toHaveBeenCalledWith({
+        values: jasmineHelper.arrayMatching([ 'push' ])
+      });
+
+      expect(changeHandler).toHaveBeenCalledWith({
+        added: jasmineHelper.arrayMatching([ 'stuff' ]),
+        removed: jasmineHelper.arrayMatching([ 'push' ])
+      });
+    });
+
+    it('fires add/change events when a value is set outside array range', () => {
+      setup([ 'test', 'push' ]);
+      array[3] = 'pop';
+
+      expect(array).toEqual([ 'test', 'push', undefined, 'pop' ]);
+
+      expect(addHandler).toHaveBeenCalledWith({
+        values: jasmineHelper.arrayMatching([ undefined, 'pop' ])
+      });
+
+      expect(changeHandler).toHaveBeenCalledWith({
+        added: jasmineHelper.arrayMatching([ undefined, 'pop' ]),
+        removed: []
+      });
+
+      expect(removeHandler).not.toHaveBeenCalled();
+    });
+
+    it('fires add/change events when the length is increased', () => {
+      setup([ 'test', 'push' ]);
+      array.length = 5;
+
+      expect(array).toEqual([ 'test', 'push', undefined, undefined, undefined ]);
+
+      expect(addHandler).toHaveBeenCalledWith({
+        values: jasmineHelper.arrayMatching([ undefined ])
+      });
+
+      expect(changeHandler).toHaveBeenCalledWith({
+        added: jasmineHelper.arrayMatching([ undefined ]),
+        removed: []
+      });
+
+      expect(removeHandler).not.toHaveBeenCalled();
+    });
+
+    it('fires remove/change events when the length is decreased', () => {
+      setup([ 'test', 'push', 'pop', 'stuff', 'moar' ]);
+      array.length = 3;
+
+      expect(array).toEqual([ 'test', 'push', 'pop' ]);
+
+      expect(removeHandler).toHaveBeenCalledWith({
+        values: jasmineHelper.arrayMatching([ 'stuff', 'moar' ])
+      });
+
+      expect(changeHandler).toHaveBeenCalledWith({
+        added: [],
+        removed: jasmineHelper.arrayMatching([ 'stuff', 'moar' ])
+      });
+
+      expect(addHandler).not.toHaveBeenCalled();
+    });
+
     it('fires add/change events on copyWithin', () => {
       setup([ 'test', 'push', 'pop', 'stuff', 'moar' ]);
       array.copyWithin(2);
