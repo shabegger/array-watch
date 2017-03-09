@@ -1,0 +1,12 @@
+// Specs
+jasmine.json
+**/test/*.*
+
+// ES Lint
+.eslintrc.json
+
+// Git
+.gitignore
+
+// NPM
+.npmignore

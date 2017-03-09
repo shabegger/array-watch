@@ -1,0 +1,32 @@
+{
+  "name": "array-watch",
+  "version": "0.0.1",
+  "description": "Track additions and deletions from an array",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "JASMINE_CONFIG_PATH=jasmine.json jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shabegger/array-watch.git"
+  },
+  "keywords": [
+    "Array",
+    "Proxy",
+    "watch",
+    "track",
+    "add",
+    "delete"
+  ],
+  "author": "Stephen Habegger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shabegger/array-watch/issues"
+  },
+  "homepage": "https://github.com/shabegger/array-watch#readme",
+  "devDependencies": {
+    "eslint": "^3.16.0",
+    "jasmine": "2.5.3"
+  }
+}
