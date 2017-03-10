@@ -1,6 +1,6 @@
 // Specs
 jasmine.json
-**/test/*.*
+**/_test_/*.*
 
 // ES Lint
 .eslintrc.json
@@ -10,3 +10,6 @@ jasmine.json
 
 // NPM
 .npmignore
+
+// VS Code
+.vscode
