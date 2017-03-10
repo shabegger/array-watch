@@ -1,6 +1,6 @@
 {
   "name": "array-watch",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Track additions and deletions from an array",
   "main": "index.js",
   "scripts": {
